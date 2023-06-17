@@ -3,35 +3,35 @@ package supermercato;
 public class Prodotto {
     enum Categoria {FRUTTA_E_VERDURA, SURGELATI, GENERI_ALIMENTARI, DETERSIVI, MACELLERIA}
 
-    private Categoria genereAlimentare;
+    private Categoria tipoProdotto;
 
-    private int codiceProdotto;
+    private String codiceProdotto;
     private String nomeProdotto;
     private double prezzo;
-    private int quantita ;
+    private int quantita;
 
 
-    public Prodotto(Categoria genereAlimentare, int codiceProdotto, String nomeProdotto, double prezzo, int quantita) {
-        this.genereAlimentare = genereAlimentare;
+    public Prodotto(Categoria tipoProdotto, String codiceProdotto, String nomeProdotto, double prezzo, int quantita) {
+        this.tipoProdotto = tipoProdotto;
         this.codiceProdotto = codiceProdotto;
         this.nomeProdotto = nomeProdotto;
         this.prezzo = prezzo;
         this.quantita = quantita;
     }
 
-    public Categoria getGenereAlimentare() {
-        return genereAlimentare;
+    public Categoria getTipoProdotto() {
+        return tipoProdotto;
     }
 
-    public void setGenereAlimentare(Categoria genereAlimentare) {
-        this.genereAlimentare = genereAlimentare;
+    public void setTipoProdotto(Categoria tipoProdotto) {
+        this.tipoProdotto = tipoProdotto;
     }
 
-    public int getCodiceProdotto() {
+    public String getCodiceProdotto() {
         return codiceProdotto;
     }
 
-    public void setCodiceProdotto(int codiceProdotto) {
+    public void setCodiceProdotto(String codiceProdotto) {
         this.codiceProdotto = codiceProdotto;
     }
 
@@ -61,10 +61,10 @@ public class Prodotto {
 
     public String toString(){
         StringBuilder sb=new StringBuilder();
-        sb.append("Prodotto[");
-        sb.append("Genere: "+genereAlimentare);
-        sb.append(" Nome: "+nomeProdotto);
-        sb.append("Prezzo: "+prezzo);
+        sb.append("Genere : " + tipoProdotto + " ");
+        sb.append("prodotto : " + nomeProdotto + " ");
+        sb.append("Prezzo : " + prezzo + " ");
+       sb.append("Quantità in magazzino : " + quantita);
         return sb.toString();
     }
 }

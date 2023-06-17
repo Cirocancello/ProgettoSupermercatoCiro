@@ -3,57 +3,69 @@ package supermercato;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Supermercato implements Promozioni{
-  List<Carrello> carrelli = new LinkedList<>();
-  List<Cliente> clienti = new LinkedList<>();
+import static java.lang.Math.floor;
+
+public class Supermercato implements Promozioni{  ;
+  List<Cliente> clienti = new LinkedList<>();//clienti in possesso della fidelitycard
   List<Prodotto> prodottiMagazzino = new LinkedList<>();
+
 
   public Supermercato(){
 
   }
 
   public void aggiungiCliente(Cliente cliente){
-    clienti.add(cliente);
+    NomeValidator nomeValidator = new NomeValidator();
+    CodiceFiscaleValidator codiceFiscaleValidator = new CodiceFiscaleValidator();
+    if(nomeValidator.validate(cliente) && codiceFiscaleValidator.validate(cliente))
+          clienti.add(cliente);
+    else System.out.println("I dati fornti non sono validi ");
 
   }
 
   public void fornisciMagazzino(Prodotto prodotto){
-    prodottiMagazzino.add(prodotto);
+    CodiceProdottoValidator codiceProdottoValidator = new CodiceProdottoValidator();
+    NomeProdottoValidator nomeProdottoValidator = new NomeProdottoValidator();
+    if(nomeProdottoValidator.validate(prodotto) && codiceProdottoValidator.validate(prodotto))
+        prodottiMagazzino.add(prodotto);
+    else System.out.println("I dati forniti non sono validi");
   }
 
-  public double vaiALlaCassa(Carrello carrello, Cliente cliente){
+  public double vaiAllaCassa(Carrello carrello, Cliente cliente){
     double conto = carrello.costoSpesa();
+    //applica la promozione e aggiorno i punti sulla sua carta fedeltà
 
-    if(clienti.contains(cliente)){
-      //applica la promozione
-      prezzoScontato(carrello.listaProdotti.size(),conto);
-    }else{
-      prezzoDaPagare(carrello.listaProdotti.size(),conto);
+    if(clienti.contains(cliente)) {
+      conto = prezzoScontato(conto);
+      cliente.setPuntiFidelityCard((int) (cliente.getPuntiFidelityCard() + floor(conto/5))); //ogni 5 € di spesa gli aggiungo 1 punto
     }
 
-    return conto;
+    return conto; //generare lo scontrino
   }
 
-  private double prezzoDaPagare(int quantita, double conto) {
-    double quantitaprodotti = quantita * conto;
-
-    return conto;
-  }
 
   @Override
-  public double prezzoScontato(int quantita, double conto) {
-    double quantitaprodotti = quantita * conto;
-    double prezzoScontato = (quantitaprodotti * 10)/100; //applico lo sconto del 10%
-    return prezzoScontato;
+  public double prezzoScontato(double conto) {
+    return conto - (conto * 3)/100; //applico lo sconto del 3%
+
   }
 
-  public void aggiungiMagazzino(Prodotto prodotto){
-    prodottiMagazzino.add(prodotto);
+  public void inventario() {
+    System.out.println("Inventario");
+    for (Prodotto p : prodottiMagazzino) {
+      System.out.println(p);
+    }
   }
-
-
-
 }
+
+
+
+//TODO implementare anche i metodi dell' interfaccia con le varie promozioni
+// ed in base al prodotto in carrello applicare gli sconti sempre per i clienti fedelitycard
+// implementare menu dinamico
+// implementare metodo per ritro premi ogni 100 punti
+
+
 
 
 

@@ -1,25 +1,36 @@
 package supermercato;
 
 public class Cliente {
-    private String nomeCognome;
+    private String nome;
+    private String cognome;
 
     private String codiceFiscale;
     private boolean fidelityCard; //nel caso la si possiede si applica uno sconto come da interfaccia
-    public Cliente(String nomeCognome,  String codiceFiscale) {
-        this.nomeCognome = nomeCognome;
+    private int puntiFidelityCard;
+
+    public Cliente(String nome, String cognome, String codiceFiscale) {
+        this.nome = nome;
+        this.cognome = cognome;
         this.codiceFiscale = codiceFiscale;
         this.fidelityCard = true;
+        this.puntiFidelityCard = 0; // creo un cliente la cui carta inizialmente ha 0 punti
     }
 
-    public String getNomeCognome() {
-        return nomeCognome;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeCognome(String nomeCognome) {
-        this.nomeCognome = nomeCognome;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
+    public String getCognome() {
+        return cognome;
+    }
 
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
 
     public String getCodiceFiscale() {
         return codiceFiscale;
@@ -37,12 +48,21 @@ public class Cliente {
         this.fidelityCard = fidelityCard;
     }
 
+    public int getPuntiFidelityCard() {
+        return puntiFidelityCard;
+    }
+
+    public void setPuntiFidelityCard(int puntiFidelityCard) {
+        this.puntiFidelityCard = puntiFidelityCard;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Cliente[");
-        sb.append("Nome e cognome: " + nomeCognome);
-        sb.append("Codice fiscale: " + codiceFiscale);
+        sb.append("Nome : " + nome + "\n");
+        sb.append("Cognome :" + cognome + "\n");
+        sb.append("Codice fiscale: " + codiceFiscale + "\n");
+        sb.append("Punti carta " + puntiFidelityCard);
         return sb.toString();
     }
 }
