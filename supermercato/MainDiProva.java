@@ -18,12 +18,12 @@ public class MainDiProva {
         Prodotto prod8 = new Prodotto(Prodotto.Categoria.GENERI_ALIMENTARI, "H", "pane", 1.0, 100);
         Prodotto prod9 = new Prodotto(Prodotto.Categoria.GENERI_ALIMENTARI, "I", "latte", 1.5, 100);
 
-        Cliente cliente1 = new Cliente("Manuel", "Galati" ,"mnm123",true);
-        Cliente cliente2 = new Cliente("Marco", "Marchi","mar342", true);
-        Cliente cliente3 = new Cliente("Simone", "Simoni","sim123",true);
-        Cliente cliente4 = new Cliente("Debora", "Dbhoram","deb123",true);
-        Cliente cliente5 = new Cliente("Gianmarco", "Gianmarchi","gia123",true);
-        Cliente cliente6 = new Cliente("Luca", "Galli","luc123",true);
+        Cliente cliente1 = new Cliente("Manuel", "Galati" ,"mnm123",true,conad);
+        Cliente cliente2 = new Cliente("Marco", "Marchi","mar342", true,conad);
+        Cliente cliente3 = new Cliente("Simone", "Simoni","sim123",true,conad);
+        Cliente cliente4 = new Cliente("Debora", "Dbhoram","deb123",true,conad);
+        Cliente cliente5 = new Cliente("Gianmarco", "Gianmarchi","gia123",true,conad);
+        Cliente cliente6 = new Cliente("Luca", "Galli","luc123",true,conad);
 
 
 
@@ -50,29 +50,29 @@ public class MainDiProva {
 
         conad.inventario();
 
-        Carrello carrello1 = new Carrello(conad);
-        carrello1.aggiungiProdotto(prod1, 50);
-        carrello1.aggiungiProdotto(prod2, 30);
+       // Carrello carrello1 = new Carrello(conad);
+        cliente1.getCarrello().aggiungiProdotto(prod1, 10);
+        cliente1.getCarrello().aggiungiProdotto(prod2, 10);
         System.out.println("------------------------------");
         System.out.println("prodotto nel carrello del cliente " + cliente1);
-        for (Map.Entry<Prodotto, Integer> map : carrello1.listaProdotti.entrySet()) {
+        for (Map.Entry<Prodotto, Integer> map :  cliente1.getCarrello().listaProdotti.entrySet()) {
             System.out.println(map);
         }
 
-        double totaleDaPagare = conad.vaiAllaCassa(carrello1,cliente1);
+        double totaleDaPagare = conad.vaiAllaCassa( cliente1.getCarrello(),cliente1);
         System.out.println("IL cliente " + cliente1 + " deve pagare " + totaleDaPagare);
 
-//        Cliente clienteNonFedele = new Cliente("Giovanni","Cancello","cnc123", false);
-//        Carrello carrello2 = new Carrello(conad);
-//        carrello2.aggiungiProdotto(prod1, 5);
-//        carrello2.aggiungiProdotto(prod2, 5);
-//        System.out.println("prodotto nel carrello del cliente "+ clienteNonFedele);
-//        for (Map.Entry<Prodotto, Integer> map : carrello2.listaProdotti.entrySet()) {
-//            System.out.println(map);
-//        }
-//
-//        double totaleDaPagare1 = conad.vaiAllaCassa(carrello2,clienteNonFedele);
-//        System.out.println("IL cliente " + clienteNonFedele + " deve pagare " + totaleDaPagare1);
+        Cliente clienteNonFedele = new Cliente("Giovanni","Cancello","cnc123", false,conad);
+        Carrello carrello2 = new Carrello(conad);
+        carrello2.aggiungiProdotto(prod1, 5);
+        carrello2.aggiungiProdotto(prod2, 5);
+        System.out.println("prodotto nel carrello del cliente "+ clienteNonFedele);
+        for (Map.Entry<Prodotto, Integer> map : carrello2.listaProdotti.entrySet()) {
+            System.out.println(map);
+        }
+
+        double totaleDaPagare1 = conad.vaiAllaCassa(carrello2,clienteNonFedele);
+        System.out.println("IL cliente " + clienteNonFedele + " deve pagare " + totaleDaPagare1);
 
         ritiroPremio(cliente1);
     }

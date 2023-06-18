@@ -1,11 +1,12 @@
 package supermercato;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class MainPrincipale {
     static Scanner input = new Scanner(System.in);
     static  Supermercato conad = new Supermercato();
-    static Carrello carrello = new Carrello(conad);
+  //  static Carrello carrello = new Carrello(conad);
 
     public static void main(String[] args) {
 
@@ -59,25 +60,24 @@ public class MainPrincipale {
 
             while (clienteScelto != null) {
                 try {
-
+                    Carrello carrello = null;
                     System.out.println("1) Aggiungi prodotti carrello ");
                     System.out.println("2) Vai alla cassa ");
                     System.out.println("3) Ritiro Premio");
                     System.out.println("altro per uscire");
                     System.out.print("scelta ");
                     scelta = input.nextLine();
-                    //input.nextLine();
 
                     switch (scelta) {
 
                         case "1": {
-                            carrello = aggiungiProdottiCarrello(carrello);
+                            carrello = aggiungiProdottiCarrello(clienteScelto.getCarrello());
                             input.nextLine();
                             break;
                         }
                         case "2": {
-                            double totaleDaPagare = conad.vaiAllaCassa(carrello, clienteScelto);
-                            System.out.println("IL cliente " + clienteScelto + " deve pagare " + totaleDaPagare);
+                            double totaleDaPagare = conad.vaiAllaCassa(clienteScelto.getCarrello(), clienteScelto);
+                            System.out.println("IL cliente " + clienteScelto + ", deve pagare " + totaleDaPagare);
                             break;
                         }
                         case "3":{
@@ -97,6 +97,7 @@ public class MainPrincipale {
         }
     }
 
+    // un cliente ritira un premio se raggiunge 50 punti sulla fedelity card
     private static void ritiroPremio(Cliente clienteScelto) {
         if(clienteScelto.getPuntiFedelityCard() >= 50) {
             clienteScelto.setPuntiFedelityCard(clienteScelto.getPuntiFedelityCard() - 50);
@@ -124,7 +125,7 @@ public class MainPrincipale {
     private static Carrello aggiungiProdottiCarrello(Carrello carrello) throws Exception {
 
         int count = 1;
-        System.out.println("Selezionare il prosotto da inserire al carrello tra i seguenti" );
+        System.out.println("Selezionare il prodotto da inserire al carrello tra i seguenti" );
         for(Prodotto p : conad.prodottiMagazzino){
             System.out.println(count + ") " + p.getNomeProdotto());
             count++;
@@ -134,6 +135,13 @@ public class MainPrincipale {
         System.out.println("Quanti ne vuoi aggiungere ?");
         int quantita = input.nextInt();
         carrello.aggiungiProdotto(prodottoScelto, quantita);
+        System.out.println("prodotti nel carrello");
+        for(Map.Entry<Prodotto, Integer> map :  carrello.listaProdotti.entrySet()){
+            System.out.print("Tipo prodotto : " + map.getKey().getTipoProdotto() + ", ");
+            System.out.print("Nome Prodotto : " + map.getKey().getNomeProdotto() + ", ");
+            System.out.print("Prezzo : " + map.getKey().getPrezzo() + ", ");
+            System.out.println("Quantità : " + quantita);
+        }
 
         return carrello;
     }
@@ -159,7 +167,7 @@ public class MainPrincipale {
         if(scelta == 1)
             fidelityCard = true;
         input.nextLine();
-        Cliente cliente = new Cliente(nome, cognome, codiceFiscale, fidelityCard );
+        Cliente cliente = new Cliente(nome, cognome, codiceFiscale, fidelityCard, conad);
         conad.aggiungiCliente(cliente);
         System.out.println("Benvenuto tra i nostri clienti ");
     }

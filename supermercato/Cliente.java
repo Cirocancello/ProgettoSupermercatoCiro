@@ -1,6 +1,7 @@
 package supermercato;
 
 public class Cliente {
+    private Supermercato supermercato;
     private Carrello carrello;
     private String nome;
     private String cognome;
@@ -9,12 +10,13 @@ public class Cliente {
     private boolean fedelityCard; //nel caso la si possiede si applica uno sconto come da interfaccia
     private int puntiFedelityCard;
 
-    public Cliente(String nome, String cognome, String codiceFiscale, boolean fedelityCard) {
+    public Cliente(String nome, String cognome, String codiceFiscale, boolean fedelityCard, Supermercato supermercato) {
         this.nome = nome;
         this.cognome = cognome;
         this.codiceFiscale = codiceFiscale;
         this.fedelityCard = fedelityCard;
         this.puntiFedelityCard = 0; // creo un cliente la cui carta inizialmente ha 0 punti
+        this.carrello = new Carrello(supermercato);
 
     }
 
@@ -58,11 +60,19 @@ public class Cliente {
         this.puntiFedelityCard = puntiFidelityCard;
     }
 
+    public Carrello getCarrello() {
+        return carrello;
+    }
+
+    public void setCarrello(Carrello carrello) {
+        this.carrello = carrello;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Nome : " + nome + ", ");
-        sb.append("Cognome :" + cognome + ", ");
+        sb.append("Cognome : " + cognome + ", ");
         sb.append("Codice fiscale: " + codiceFiscale + ", ");
         sb.append("Punti carta " + puntiFedelityCard+ ", ");
         sb.append("Fidelity Card " + fedelityCard);
