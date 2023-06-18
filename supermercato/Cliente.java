@@ -1,19 +1,21 @@
 package supermercato;
 
 public class Cliente {
+    private Carrello carrello;
     private String nome;
     private String cognome;
 
     private String codiceFiscale;
-    private boolean fidelityCard; //nel caso la si possiede si applica uno sconto come da interfaccia
-    private int puntiFidelityCard;
+    private boolean fedelityCard; //nel caso la si possiede si applica uno sconto come da interfaccia
+    private int puntiFedelityCard;
 
-    public Cliente(String nome, String cognome, String codiceFiscale) {
+    public Cliente(String nome, String cognome, String codiceFiscale, boolean fedelityCard) {
         this.nome = nome;
         this.cognome = cognome;
         this.codiceFiscale = codiceFiscale;
-        this.fidelityCard = true;
-        this.puntiFidelityCard = 0; // creo un cliente la cui carta inizialmente ha 0 punti
+        this.fedelityCard = fedelityCard;
+        this.puntiFedelityCard = 0; // creo un cliente la cui carta inizialmente ha 0 punti
+
     }
 
     public String getNome() {
@@ -40,29 +42,30 @@ public class Cliente {
         this.codiceFiscale = codiceFiscale;
     }
 
-    public boolean isFidelityCard() {
-        return fidelityCard;
+    public boolean isFedelityCard() {
+        return fedelityCard;
     }
 
-    public void setFidelityCard(boolean fidelityCard) {
-        this.fidelityCard = fidelityCard;
+    public void setFedelityCard(boolean fedelityCard) {
+        this.fedelityCard = fedelityCard;
     }
 
-    public int getPuntiFidelityCard() {
-        return puntiFidelityCard;
+    public int getPuntiFedelityCard() {
+        return puntiFedelityCard;
     }
 
-    public void setPuntiFidelityCard(int puntiFidelityCard) {
-        this.puntiFidelityCard = puntiFidelityCard;
+    public void setPuntiFedelityCard(int puntiFidelityCard) {
+        this.puntiFedelityCard = puntiFidelityCard;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Nome : " + nome + "\n");
-        sb.append("Cognome :" + cognome + "\n");
-        sb.append("Codice fiscale: " + codiceFiscale + "\n");
-        sb.append("Punti carta " + puntiFidelityCard);
+        sb.append("Nome : " + nome + ", ");
+        sb.append("Cognome :" + cognome + ", ");
+        sb.append("Codice fiscale: " + codiceFiscale + ", ");
+        sb.append("Punti carta " + puntiFedelityCard+ ", ");
+        sb.append("Fidelity Card " + fedelityCard);
         return sb.toString();
     }
 }

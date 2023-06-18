@@ -61,9 +61,9 @@ public class Prodotto {
 
     public String toString(){
         StringBuilder sb=new StringBuilder();
-        sb.append("Genere : " + tipoProdotto + " ");
-        sb.append("prodotto : " + nomeProdotto + " ");
-        sb.append("Prezzo : " + prezzo + " ");
+        sb.append("Genere : " + tipoProdotto + ", ");
+        sb.append("prodotto : " + nomeProdotto + ", ");
+        sb.append("Prezzo : " + prezzo + ", ");
        sb.append("Quantità in magazzino : " + quantita);
         return sb.toString();
     }

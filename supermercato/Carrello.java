@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Carrello {
-    Supermercato supermercato;
+    private  Supermercato supermercato;
     Map<Prodotto, Integer> listaProdotti = new HashMap<>(); // prodotti distinti nel carrello (prodotto e quantità)
 
 

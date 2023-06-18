@@ -35,9 +35,10 @@ public class Supermercato implements Promozioni{  ;
     double conto = carrello.costoSpesa();
     //applica la promozione e aggiorno i punti sulla sua carta fedeltà
 
-    if(clienti.contains(cliente)) {
+    if(cliente.isFedelityCard()) {
       conto = prezzoScontato(conto);
-      cliente.setPuntiFidelityCard((int) (cliente.getPuntiFidelityCard() + floor(conto/5))); //ogni 5 € di spesa gli aggiungo 1 punto
+      cliente.setPuntiFedelityCard((int) (cliente.getPuntiFedelityCard() + floor(conto/5))); //ogni 5 € di spesa gli aggiungo 1 punto
+
     }
 
     return conto; //generare lo scontrino
@@ -62,8 +63,7 @@ public class Supermercato implements Promozioni{  ;
 
 //TODO implementare anche i metodi dell' interfaccia con le varie promozioni
 // ed in base al prodotto in carrello applicare gli sconti sempre per i clienti fedelitycard
-// implementare menu dinamico
-// implementare metodo per ritro premi ogni 100 punti
+
 
 
 
